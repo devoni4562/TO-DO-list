@@ -1,1 +1,61 @@
-/.idea
+# Node.js
+node_modules/
+npm-debug.log
+
+# Vue.js
+dist/
+*.log
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+
+# npm
+*.bak
+*.swp
+*~
+
+# Logs
+logs
+*.log
+
+# Editor directories and files
+.editorconfig
+.eslint*
+*.sublime-project
+*.sublime-workspace
+*.komodoproject
+.komodotools
+.kate-swp/
+*.kate-swp
+
+# Dependency directories
+jspm_packages/
+typings/
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn
+yarn-error.log
+.pnp.*
+.pnp
