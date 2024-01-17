@@ -51,9 +51,9 @@ Ce projet est une application de gestion de tâches (To-Do) développée avec No
 
 ## Suivi du Projet
 
-Le suivi du développement et des tâches est réalisé via [Trello](https://trello.com/b/TfK87nNi/tableau-agile-python-analyse-texte). Consultez notre tableau Trello pour suivre les progrès, voir les tâches en cours, et identifier les prochaines étapes du projet.
+Le suivi du développement et des tâches est réalisé via [Trello](https://trello.com/b/NDrQlZEO/tableau-agile-vue-node-todo-list). Consultez notre tableau Trello pour suivre les progrès, voir les tâches en cours, et identifier les prochaines étapes du projet.
 
-[![Tableau Trello](https://img.shields.io/badge/Trello-Tableau%20Agile-blue?style=for-the-badge&logo=trello)]([https://trello.com/b/TfK87nNi/tableau-agile-python-analyse-texte](https://trello.com/b/NDrQlZEO/tableau-agile-vue-node-todo-list))
+[![Tableau Trello](https://img.shields.io/badge/Trello-Tableau%20Agile-blue?style=for-the-badge&logo=trello)](https://trello.com/b/NDrQlZEO/tableau-agile-vue-node-todo-list)
 
 ## Licence
 
