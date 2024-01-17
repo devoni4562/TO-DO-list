@@ -1,0 +1,9 @@
+{
+  "private": true,
+  "workspaces": ["frontend", "backend"],
+  "scripts": {
+    "start:frontend": "cd Vue.js && npm start",
+    "start:backend": "cd NodeJS && npm start",
+    "start:both": "concurrently \"npm run start:frontend\" \"npm run start:backend\""
+  }
+}
