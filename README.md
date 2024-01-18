@@ -21,7 +21,7 @@ Ce projet est une application de gestion de tâches (To-Do) développée avec No
 
 1. Cloner le repo :
    ```bash
-   git clone https://github.com/votre-utilisateur/TO-DO-list.git
+   git clone https://github.com/devoni4562/TO-DO-list.git
 2. Aller dans le répertoire du projet :
    ```bash
    cd TO-DO-list
