@@ -8,11 +8,12 @@ connectDB().then(r => console.log("Connecté à MongoDB"));
 
 const server = express();
 
-// Middleware données Request
+// Middleware lecture données Request
 server.use(express.json());
 server.use(express.urlencoded({extended: false}));
 
 server.use("/task", require('./routes/task.routes'));
+server.use("/category", require('./routes/category.routes'));
 
 // Démarrage du serveur
 server.listen(port, () => {

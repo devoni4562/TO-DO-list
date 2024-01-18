@@ -13,7 +13,7 @@ module.exports.setTask = async (req, res) => {
 
     const task = await TaskModel.create({
         title: req.body.message,
-        category: "code frontend",
+        category: req.body.categoryId,
         completed: false,
         user: req.body.author
     });
