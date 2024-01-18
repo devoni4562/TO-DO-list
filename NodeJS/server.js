@@ -1,12 +1,16 @@
-// server.js
 const express = require('express');
+const port = 3000;
+
 const server = express();
 
-server.get('/', (req, res) => {
-    res.send('Hello, World!');
-});
 
-const port = 3000;
+// Middleware données Request
+server.use(express.json());
+server.use(express.urlencoded({extended: false}));
+
+server.use("/task", require('./routes/task.routes'));
+
+// Démarrage du serveur
 server.listen(port, () => {
     console.log(`Server running at http://localhost:${port}/`);
 });
@@ -19,5 +23,3 @@ const dbConnection = mongoose.connect('mongodb://localhost:27017/TODO-list-mongo
 }).catch((error) => {
     console.error('Erreur de connexion à MongoDB :', error);
 });
-
-
