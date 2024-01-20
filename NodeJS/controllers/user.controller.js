@@ -16,7 +16,12 @@ module.exports.signup = (req, res) => {
 
 
 module.exports.login = (req, res, next) => {
-    UserModel.findOne({email: req.body.identity} || {pseudo: req.body.identity})
+    UserModel.findOne({
+        $or: [
+            {email: req.body.identity},
+            {pseudo: req.body.identity}
+        ]
+    })
         .then(
             user => {
                 if (user === null) {
