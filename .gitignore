@@ -59,6 +59,3 @@ typings/
 yarn-error.log
 .pnp.*
 .pnp
-
-## Configuration
-.env
