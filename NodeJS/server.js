@@ -1,6 +1,7 @@
 const express = require('express');
 const connectDB = require("./config/db");
 const dotenv = require('dotenv').config();
+const cors = require('cors');
 const port = 3000;
 const server = express();
 
@@ -15,6 +16,8 @@ server.use(express.urlencoded({extended: false}));
 
 
 // Routes
+server.use(cors());
+
 server.use("/task", require('./routes/task.routes'));
 server.use("/category", require('./routes/category.routes'));
 server.use("/user", require('./routes/user.routes'));
