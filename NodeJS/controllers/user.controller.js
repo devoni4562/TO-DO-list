@@ -1,5 +1,6 @@
 const UserModel = require('../models/user.model');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 module.exports.signup = (req, res) => {
     bcrypt.hash(req.body.password, 10)
@@ -16,7 +17,7 @@ module.exports.signup = (req, res) => {
 
 
 module.exports.login = (req, res, next) => {
-    UserModel.findOne({
+    UserModel.findOne({ // Sensible à la casse.
         $or: [
             {email: req.body.identity},
             {pseudo: req.body.identity}
@@ -34,8 +35,11 @@ module.exports.login = (req, res, next) => {
                             } else {
                                 res.status(200).json({
                                     userId: user._id,
-                                    token: 'TOKEN' // Système de token non créé pour le moment
-
+                                    token: jwt.sign(
+                                        {userId: user._id},
+                                        process.env.JWT_KEY, // Clef non sécurisé : utilisation de cette clef dans un but purement 'scolaire'.
+                                        {expiresIn: '24h'}
+                                    )
                                 });
                             }
                         })

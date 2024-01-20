@@ -14,6 +14,7 @@ module.exports.setCategory = async (req, res) => {
 
     const category = await CategoryModel.create({
         title: req.body.title,
+        userId: req.auth.userId
     })
         .catch(err => res.status(500).json({err}));
     res.status(201).json(category);

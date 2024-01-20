@@ -7,15 +7,15 @@ module.exports.getTasks = async (req, res) => {
 };
 
 module.exports.setTask = async (req, res) => {
-    if (!req.body.message) {
+    if (!req.body.title) {
         res.status(400).json({message: "Merci d'ajouter une tache"});
     }
 
     const task = await TaskModel.create({
-        title: req.body.message,
-        category: req.body.categoryId,
+        title: req.body.title,
+        categoryId: req.body.categoryId,
         completed: false,
-        user: req.body.author
+        userId: req.auth.userId
     })
         .catch(err => res.status(500).json({err}));
     res.status(201).json(task);
@@ -25,7 +25,7 @@ module.exports.editTask = async (req, res) => {
     const task = await TaskModel.findById(req.params.id);
 
     if (!task) {
-        res.status(400).json({message: "Cette tache m'existe pas"});
+        res.status(400).json({message: "Cette tache n'existe pas"});
     }
 
     const updateTask = await TaskModel.findByIdAndUpdate(
@@ -41,11 +41,11 @@ module.exports.deleteTask = async (req, res) => {
     const task = await TaskModel.findById(req.params.id);
 
     if (!task) {
-        res.status(400).json({message: "Cette tache m'existe pas"});
+        res.status(400).json({message: "Cette tache n'existe pas"});
     }
 
     await task.deleteOne()
         .catch(err => res.status(500).json({err}));
 
-    res.status(200).json({message: "supprimé"});
+    res.status(200).json({message: "Tache supprimé"});
 };

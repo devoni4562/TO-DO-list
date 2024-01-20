@@ -7,7 +7,7 @@ const taskSchema = new mongoose.Schema(
             type: String,
             required: true
         },
-        category: {
+        categoryId: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Category',
             required: true
@@ -16,8 +16,8 @@ const taskSchema = new mongoose.Schema(
             type: Boolean,
             required: true
         },
-        user: {
-            type: String,
+        userId: {
+            type: mongoose.Schema.Types.ObjectId,
             required: true
         }
     },
