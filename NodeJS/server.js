@@ -4,7 +4,9 @@ const dotenv = require('dotenv').config();
 const port = 3000;
 
 // Connexion DB
-connectDB().then(r => console.log("Connecté à MongoDB"));
+connectDB()
+    .then(() => console.log("Connecté à MongoDB"))
+    .catch(() => console.log('Échec de la connexion'));
 
 const server = express();
 
@@ -14,6 +16,7 @@ server.use(express.urlencoded({extended: false}));
 
 server.use("/task", require('./routes/task.routes'));
 server.use("/category", require('./routes/category.routes'));
+server.use("/user", require('./routes/user.routes'));
 
 // Démarrage du serveur
 server.listen(port, () => {
