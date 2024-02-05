@@ -1,13 +1,12 @@
-const mongoose = require('mongoose');
+const mariadb = require('mariadb');
+const dotenv = require('dotenv').config({path: '../.env'});
 
-const connectDB = async () => {
-    try {
-        mongoose.set('strictQuery', false);
-        await mongoose.connect(process.env.MONGO_URI);
-    } catch (err) {
-        console.log(err);
-        process.exit();
-    }
-};
+const connectDB = mariadb.createPool({
+    host: process.env.MARIA_HOST,
+    user: process.env.MARIA_USER,
+    password: process.env.MARIA_PW,
+    database: process.env.MARIA_DB,
+    connectionLimit: 5
+});
 
 module.exports = connectDB;
