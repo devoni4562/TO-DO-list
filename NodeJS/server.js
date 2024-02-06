@@ -7,14 +7,14 @@ const server = express();
 
 
 // Connexion DB
-connectDB.getConnection()
-    .then(conn => {
-        console.log('Connexion success');
-        conn.release();
-    })
-    .catch(err => {
-        console.error('Connexion fail :', err.stack);
-    });
+// connectDB.getConnection()
+//     .then(conn => {
+//         console.log('Connexion success');
+//         conn.release();
+//     })
+//     .catch(err => {
+//         console.error('Connexion fail :', err.stack);
+//     });
 // Middleware serveur uniquement
 server.use(express.json());
 server.use(express.urlencoded({extended: false}));
