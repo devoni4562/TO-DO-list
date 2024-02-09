@@ -2,7 +2,6 @@ const mariadb = require('mariadb');
 const dotenv = require('dotenv').config({path: '../.env'});
 const fs = require('fs');
 
-
 function createPool() {
     return mariadb.createPool({
         host: process.env.MARIA_HOST,
@@ -12,40 +11,41 @@ function createPool() {
     });
 }
 
-function updatePool() {
-    
+function updatePool(pool) {
+    pool.end();
+    pool = mariadb.createPool({
+        host: process.env.MARIA_HOST,
+        user: process.env.MARIA_USER,
+        password: process.env.MARIA_PW,
+        database: process.env.MARIA_DB,
+        connectionLimit: 5
+    });
 }
 
-const connectDB = createPool();
-
-connectDB.getConnection()
-    .then(conn => {
+async function initializeDatabase() {
+    try {
+        const connectDB = createPool();
+        const conn = await connectDB.getConnection();
         console.log('Connexion before initialisation success');
 
-        fs.readFile('./scripts/initialisation.sql', 'utf-8', (err, data) => {
-            if (err) {
-                console.error('Error during script reading : ', err.stack);
-                conn.release();
-                return;
-            }
+        const data = await fs.promises.readFile('./scripts/initialisation.sql', 'utf-8');
+        const commands = data.split(';').filter(Boolean);
 
-            const commands = data.split(';').filter(Boolean);
+        await Promise.all(commands.map(command => conn.query(command.trim())));
 
-            Promise.all(commands.map(command => conn.query(command.trim())))
-                .then(() => {
-                        console.log('Script executing success');
-                    }
-                )
-                .catch(err => {
-                    console.error('Executing script fail : ', err.stack);
-                });
+        console.log('Script executing success');
 
-            conn.release();
-        });
-    })
-    .catch(err => {
-        console.error('Connexion fail : ', err.stack);
-    });
+        await conn.release();
+        updatePool(connectDB);
+        return connectDB;
+    } catch (err) {
+        console.error('Error during script execution : ', err.stack);
+    }
+}
 
-
-module.exports = connectDB;
+initializeDatabase()
+    .then(connectDB => {
+            console.log('fin d\'initialisation');
+            module.exports = connectDB;
+        }
+    );
