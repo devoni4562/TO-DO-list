@@ -33,7 +33,7 @@ async function initializeDatabase() {
 
         await Promise.all(commands.map(command => conn.query(command.trim())));
 
-        console.log('Script executing success');
+        console.log('Initialisation script executing with success');
 
         await conn.release();
         updatePool(connectDB);
@@ -45,7 +45,7 @@ async function initializeDatabase() {
 
 initializeDatabase()
     .then(connectDB => {
-            console.log('fin d\'initialisation');
+            console.log('End of initialisation');
             module.exports = connectDB;
         }
     );
